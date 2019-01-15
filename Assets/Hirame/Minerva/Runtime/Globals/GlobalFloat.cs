@@ -26,5 +26,25 @@ namespace Hirame.Minerva
             RuntimeValue /= divider;
         }
         
+        
+        public void Add (int value)
+        {
+            RuntimeValue += value;
+        }
+
+        public void Subtract (int value)
+        {
+            RuntimeValue -= value;
+        }
+
+        public void Multiply (int multiplier)
+        {
+            RuntimeValue *= multiplier;
+        }
+
+        public void Divide (int divider)
+        {
+            RuntimeValue /= divider;
+        }
     }
 }
