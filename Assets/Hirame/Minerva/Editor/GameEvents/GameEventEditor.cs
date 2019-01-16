@@ -59,6 +59,8 @@ namespace Hirame.Minerva.Editor
 
                 for (var i = 0; i < count; i++)
                 {
+                    // TODO:
+                    // Fix the type mismatch.
                     EditorGUILayout.PropertyField (dynamicListeners.GetArrayElementAtIndex (i), GUIContent.none);
                 }
 

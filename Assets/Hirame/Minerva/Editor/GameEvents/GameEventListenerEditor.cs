@@ -11,7 +11,6 @@ namespace Hirame.Minerva.Editor
         {
             listener = target as GameEventListener;
         }
-
         
     }
 }
