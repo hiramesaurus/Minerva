@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Hirame.Minerva
 {
@@ -6,15 +7,10 @@ namespace Hirame.Minerva
     public sealed class GlobalColor : GlobalValue<Color>
     {
 
-        public void Multiply (float multiplier)
-        {
-            RuntimeValue *= multiplier;
-        }
-        
-        public void Multiply (Color color)
-        {
-            RuntimeValue *= color;
-        }
-        
+        [UsedImplicitly]
+        public void Multiply (float multiplier) => RuntimeValue *= multiplier;
+
+        [UsedImplicitly]
+        public void Multiply (Color color) => RuntimeValue *= color;
     }
 }
