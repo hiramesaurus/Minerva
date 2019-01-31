@@ -10,7 +10,7 @@ namespace Hirame.Minerva.GameEvents
 
         public void Raise (int value)
         {
-            
+            LinkedGlobal.RuntimeValue = value;
         }
 
         public void RaiseIncrementing (int value)

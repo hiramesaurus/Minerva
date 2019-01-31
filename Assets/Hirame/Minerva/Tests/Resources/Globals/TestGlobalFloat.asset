@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e436fc67b1f567447824e2bc905a317b, type: 3}
   m_Name: TestGlobalFloat
   m_EditorClassIdentifier: 
-  InitialValue: 14
-  RuntimeValue: 14
+  ResetOnPlay: 1
+  Initial: 14
+  Runtime: 14

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68426fd476741ca47ba2ff7251a4835b, type: 3}
   m_Name: TestGlobalColor
   m_EditorClassIdentifier: 
-  InitialValue: {r: 0.6037736, g: 0.06550375, b: 0.06550375, a: 0}
-  RuntimeValue: {r: 0.6037736, g: 0.06550375, b: 0.06550375, a: 0}
+  ResetOnPlay: 1
+  Initial: {r: 0.6037736, g: 0.06550375, b: 0.06550375, a: 0}
+  Runtime: {r: 0.6037736, g: 0.06550375, b: 0.06550375, a: 0}
