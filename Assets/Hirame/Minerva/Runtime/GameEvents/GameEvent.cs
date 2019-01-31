@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Hirame.Minerva
 {
-    [CreateAssetMenu (menuName = "Hirame/Game Events/Game Event")]
+    [CreateAssetMenu (menuName = "Minerva/Events/Game Event")]
     public class GameEvent : ScriptableObject
     {
         [SerializeField] private List<GameEventListener> dynamicListeners = new List<GameEventListener> ();
@@ -12,7 +12,13 @@ namespace Hirame.Minerva
         [SerializeField] private bool enableStaticEvent;
         [SerializeField] private UnityEvent staticEvent;
 
+        [System.Obsolete ("Use 'Raise' instead.")]
         public void RaiseEvent ()
+        {
+            Raise ();
+        }
+
+        public void Raise ()
         {
             for (var i = dynamicListeners.Count - 1; i >= 0; i--)
             {
@@ -25,6 +31,11 @@ namespace Hirame.Minerva
             }
         }
         
+        /// <summary>
+        /// Add Listener and make sure it is note duplicated.
+        /// </summary>
+        /// <param name="listener"></param>
+        /// <returns>'true' if the listener was added, 'false' otherwise.</returns>
         public bool TryAddListener (GameEventListener listener)
         {
             if (dynamicListeners.Contains (listener))
@@ -39,6 +50,11 @@ namespace Hirame.Minerva
             dynamicListeners.Add (listener);
         }
 
+        /// <summary>
+        /// Add Listener and make sure it is note duplicated without returning if it failed of not.
+        /// </summary>
+        /// <param name="listener"></param>
+        /// <returns></returns>
         public void AddUniqueListener (GameEventListener listener)
         {
             if (!dynamicListeners.Contains (listener))
@@ -54,5 +70,22 @@ namespace Hirame.Minerva
         {
             dynamicListeners.Clear ();
         }
+    }
+
+    public abstract class GameEvent<T> : GameEvent
+        where T : unmanaged
+    {
+        public T EventData;
+    }
+
+    public abstract class GameEvent<T1, T2> : GameEvent
+        where T1 : unmanaged
+        where T2 : GlobalValue<T1>
+    {
+        public bool LinkedGlobalData;
+        public T2 EventData;
+
+        public T1 GetEventRuntime => EventData.Runtime;
+        public T1 GetEventInitial => EventData.Initial;
     }
 }

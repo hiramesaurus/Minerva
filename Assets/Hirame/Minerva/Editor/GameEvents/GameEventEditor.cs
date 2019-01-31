@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Hirame.Minerva.Editor
 {
-    [CustomEditor (typeof (GameEvent))]
+    [CustomEditor (typeof (GameEvent), true)]
     public class GameEventEditor : MinervaEditorBase
     {
         private GameEvent gameEvent;
@@ -58,10 +58,12 @@ namespace Hirame.Minerva.Editor
                 }
 
                 for (var i = 0; i < count; i++)
-                {
-                    // TODO:
-                    // Fix the type mismatch.
-                    EditorGUILayout.PropertyField (dynamicListeners.GetArrayElementAtIndex (i), GUIContent.none);
+                {                   
+                    var reference = dynamicListeners.GetArrayElementAtIndex (i).objectReferenceValue;
+                    EditorGUILayout.ObjectField (
+                        EditorUtility.InstanceIDToObject (reference.GetInstanceID ()), 
+                        typeof(Object), 
+                        true);
                 }
 
             }

@@ -2,10 +2,10 @@
 
 namespace Hirame.Minerva
 {
-    [CreateAssetMenu (menuName = "Hirame/Globals/Boolean")]
+    [CreateAssetMenu (menuName = "Minerva/Globals/Boolean")]
     public sealed class GlobalBool : GlobalValue<bool>
     {
-        public void Invert () => RuntimeValue = !RuntimeValue;
+        public void Invert () => Runtime = !Runtime;
         
     }
 }

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e436fc67b1f567447824e2bc905a317b, type: 3}
-  m_Name: TestGlobalFloat
+  m_Script: {fileID: 11500000, guid: e6979281c1232b749b16921653b8138a, type: 3}
+  m_Name: New Global Object
   m_EditorClassIdentifier: 
-  InitialValue: 10
-  RuntimeValue: 10
+  ResetOnPlay: 1
+  InitialValue: {fileID: 0}
+  RuntimeValue: {fileID: 0}
