@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Hirame.Minerva
+namespace Hirame.Minerva.GameEvents
 {
     [CreateAssetMenu (menuName = "Minerva/Events/Game Event")]
     public class GameEvent : ScriptableObject
@@ -34,7 +34,7 @@ namespace Hirame.Minerva
         /// <summary>
         /// Add Listener and make sure it is note duplicated.
         /// </summary>
-        /// <param name="listener"></param>
+        /// <param name="receiver"></param>
         /// <returns>'true' if the listener was added, 'false' otherwise.</returns>
         public bool TryAddListener (GameEventListener listener)
         {
@@ -53,7 +53,7 @@ namespace Hirame.Minerva
         /// <summary>
         /// Add Listener and make sure it is note duplicated without returning if it failed of not.
         /// </summary>
-        /// <param name="listener"></param>
+        /// <param name="receiver"></param>
         /// <returns></returns>
         public void AddUniqueListener (GameEventListener listener)
         {
@@ -82,7 +82,7 @@ namespace Hirame.Minerva
         where T1 : unmanaged
         where T2 : GlobalValue<T1>
     {
-        public bool LinkedGlobalData;
+        public bool LinkGlobal;
         public T2 EventData;
 
         public T1 GetEventRuntime => EventData.Runtime;

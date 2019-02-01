@@ -9,7 +9,8 @@ namespace Hirame.Minerva.Editor
         {
             foreach (var global in Resources.LoadAll<GlobalValueBase> (string.Empty))
             {
-                global.Reset ();
+                if (global.ResetOnPlay)
+                    global.Reset ();
             }
         }
     }

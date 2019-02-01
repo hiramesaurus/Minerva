@@ -1,33 +1,36 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Hirame.Minerva
+namespace Hirame.Minerva.GameEvents
 {
-    public class GameEventListener : MonoBehaviour
+    public class GameEventListener : ScriptableObject
     {
+        public bool EnableInEditMode;      
+        public int ParentInstanceId { get; set; }
+        
         public GameEvent ListenedEvent;
-        public UnityEvent Event;
+        public UnityEvent EventHandler;
 
-        public GameEventListener ()
-        {
-            // TODO:
-            // Add logic to enable true lifetime event binding.
-        }
-
-        internal void OnEventRaised ()
-        {
-            Event.Invoke ();
-        }
-
-        private void OnEnable ()
+        public void StartListening ()
         {
             ListenedEvent.AddListener (this);
         }
 
-        private void OnDisable ()
+        public void StopListening ()
         {
             ListenedEvent.RemoveListener (this);
         }
+        
+        public void OnEventRaised ()
+        {
+            EventHandler.Invoke ();
+        }
+
+        public void Clear ()
+        {
+            ListenedEvent.RemoveListener (this);
+            EventHandler.RemoveAllListeners ();
+        }
     }
+
 }

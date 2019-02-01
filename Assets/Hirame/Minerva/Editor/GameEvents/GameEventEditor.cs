@@ -1,7 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using Hirame.Minerva.Editor;
 
-namespace Hirame.Minerva.Editor
+namespace Hirame.Minerva.GameEvents.Editor
 {
     [CustomEditor (typeof (GameEvent), true)]
     public class GameEventEditor : MinervaEditorBase
