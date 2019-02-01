@@ -13,11 +13,6 @@ namespace Hirame.Minerva.GameEvents
         [HideInInspector]
         public UnityEvent Event;
 
-        internal void OnEventRaised ()
-        {
-            Event.Invoke ();
-        }
-        
         private void OnEnable ()
         {
             Listener.ParentInstanceId = GetInstanceID ();

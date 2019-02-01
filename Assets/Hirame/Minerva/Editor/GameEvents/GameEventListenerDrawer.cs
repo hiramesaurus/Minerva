@@ -17,12 +17,13 @@ namespace Hirame.Minerva.GameEvents.Editor
             var indent = EditorGUI.indentLevel;
             var foldRect = new Rect (position.x, position.y, 16, 16);
             
-            showProperty = EditorGUI.Foldout (foldRect, showProperty, "");
+            showProperty = EditorGUI.Foldout (foldRect, showProperty, "", true);
 
             DrawerHeight = 0;
             position.height = 16;
             EditorGUI.PropertyField (position, property);
             position.y += 20;
+            
             if (!showProperty || propertyEditor == null)
                 return;
 
