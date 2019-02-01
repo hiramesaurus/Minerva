@@ -20,7 +20,7 @@ namespace Hirame.Minerva.GameEvents.Editor
 
         public override void OnInspectorGUI ()
         {
-            EditorGUILayout.PropertyField (ListenerProp);
+            EditorGUILayout.PropertyField (ListenerProp, true);
         }
     }
 }

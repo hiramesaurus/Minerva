@@ -3,7 +3,8 @@ using UnityEngine.Events;
 
 namespace Hirame.Minerva.GameEvents
 {
-    public class GameEventListener : ScriptableObject
+    [System.Serializable]
+    public class GameEventListener
     {
         public bool EnableInEditMode;      
         public int ParentInstanceId { get; set; }

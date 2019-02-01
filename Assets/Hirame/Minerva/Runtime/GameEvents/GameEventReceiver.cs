@@ -7,11 +7,9 @@ namespace Hirame.Minerva.GameEvents
     public class GameEventReceiver : MonoBehaviour
     {
         public GameEventListener Listener;
-        
-        [HideInInspector]
-        public GameEvent ListenedEvent;
-        [HideInInspector]
-        public UnityEvent Event;
+
+        [HideInInspector] public GameEvent ListenedEvent;
+        [HideInInspector] public UnityEvent Event;
 
         private void OnEnable ()
         {
@@ -33,9 +31,11 @@ namespace Hirame.Minerva.GameEvents
         {
             if (Listener == null)
             {
-                var listener = ScriptableObject.CreateInstance<GameEventListener> ();
-                listener.EventHandler = Event;
-                listener.ListenedEvent = ListenedEvent;
+                var listener = new GameEventListener
+                {
+                    EventHandler = Event,
+                    ListenedEvent = ListenedEvent
+                };
                 Listener = listener;
                 Event = null;
                 ListenedEvent = null;
