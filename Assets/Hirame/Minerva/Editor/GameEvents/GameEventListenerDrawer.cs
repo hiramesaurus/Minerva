@@ -1,9 +1,10 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace Hirame.Minerva.GameEvents.Editor
 {
-    //[CustomPropertyDrawer (typeof (GameEventListener))]
+    [CustomPropertyDrawer (typeof (GameEventListener))]
     public class GameEventListenerDrawer : PropertyDrawer
     {
         private bool showProperty;
@@ -11,80 +12,71 @@ namespace Hirame.Minerva.GameEvents.Editor
         
         // TODO:
         // Me no like. Ugly, ugly, UGLY!
-        public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI (Rect fullRect, SerializedProperty property, GUIContent label)
         {
-            //EditorGUI.PropertyField (position, property, label);
+            var listenerProp = property.FindPropertyRelative ("ListenedEvent");
+            var handlerProp = property.FindPropertyRelative ("EventHandler");
+            var editorToggleProp = property.FindPropertyRelative ("EnableInEditMode");
+
+            fullRect.y += 8;
+            fullRect.height -= 8;
+            var lineRect = fullRect;
+            lineRect.height = 20;
+
+            if (listenerProp.objectReferenceValue != null)
+            {
+                var labelSuffix = listenerProp.objectReferenceValue.name;
+                label.text = $"{label.text} ({labelSuffix})";
+            }
+            else
+            {
+                label.text = $"{label.text} (None)";
+            }
+           
+            
+            GUI.Box (fullRect, "");
+            GUI.Box (lineRect, "");
+            
+            var buttonRect = lineRect;
+            buttonRect.x += buttonRect.width - 60;
+            buttonRect.width = 60;
+            buttonRect.height -= 2;
+
+            if (GUI.Button (buttonRect, "Invoke"))
+            {
+                Debug.Log ("Super cool not yet implemented thing!");
+            }
+
+            lineRect.y += 2;
+            GUI.Label (lineRect, label, EditorStyles.label);
+        
+            lineRect.y += 20;
+            lineRect.height = 16;
+
+            using (var change = new EditorGUI.ChangeCheckScope ())
+            {
+                EditorGUI.PropertyField (lineRect, editorToggleProp);
+
+                lineRect.y += 18;
+                EditorGUI.PropertyField (lineRect, listenerProp);
+
+                lineRect.y += 18;
+                lineRect.height = EditorGUI.GetPropertyHeight (handlerProp);
+                EditorGUI.PropertyField (lineRect, handlerProp);
+
+                if (change.changed)
+                {
+                    property.serializedObject.ApplyModifiedProperties ();
+                    EditorUtility.SetDirty (property.serializedObject.targetObject);
+                }
+            }
         }
 
-       // public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
-       // {
-         //   return 16 + EditorGUI.GetPropertyHeight (property);
-        //}
+        public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
+        {
+            return 16 + EditorGUI.GetPropertyHeight (property);
+        }
 
-//        void Asd ()
-//        {
-//            var propertyEditor = UnityEditor.Editor.CreateEditor (property.objectReferenceValue);
-//            var indent = EditorGUI.indentLevel;
-//            var foldRect = new Rect (position.x, position.y, 16, 16);
-//            
-//            showProperty = EditorGUI.Foldout (foldRect, showProperty, "", true);
-//
-//            DrawerHeight = 0;
-//            position.height = 16;
-//            EditorGUI.PropertyField (position, property);
-//            position.y += 20;
-//            
-//            if (!showProperty || propertyEditor == null)
-//                return;
-//
-//            position.x += 20;
-//            position.width -= 40;
-//            var so = propertyEditor.serializedObject;
-//            so.Update ();
-//            var prop = so.GetIterator ();
-//
-//            prop.NextVisible (true);
-//            
-//            // HMM this seems redundant...
-//            var childDepth = 0;
-//            var drawChildren = false;
-//            
-//            while (prop.NextVisible (true))
-//            {
-//                if (prop.depth == 0)
-//                {
-//                    drawChildren = false;
-//                    childDepth = 0;
-//                }
-//
-//                if (drawChildren && prop.depth > childDepth)
-//                {
-//                    continue;
-//                }
-//
-//                var propHeight = EditorGUI.GetPropertyHeight (prop);
-//                position.height = propHeight;
-//                EditorGUI.indentLevel = indent + prop.depth;
-//                
-//                if (EditorGUI.PropertyField (position, prop))
-//                {
-//                    drawChildren = false;
-//                }
-//                else
-//                {
-//                    drawChildren = true;
-//                    childDepth = prop.depth;
-//                }
-//
-//                position.y += propHeight;
-//                DrawerHeight += propHeight;
-//            }
-//
-//            if (GUI.changed)
-//            {
-//                so.ApplyModifiedProperties ();
-//            }
-//        }
 
     }
 }

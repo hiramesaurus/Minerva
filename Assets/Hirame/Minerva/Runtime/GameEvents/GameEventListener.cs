@@ -6,17 +6,10 @@ namespace Hirame.Minerva.GameEvents
     [System.Serializable]
     public class GameEventListener
     {
-        public bool EnableInEditMode;      
-        public int ParentInstanceId { get; set; }
+        public bool EnableInEditMode;
         
-        [SerializeField]
-        internal GameEvent ListenedEvent;
+        public GameEvent ListenedEvent;
         public UnityEvent EventHandler;
-
-        private void OnEnable ()
-        {
-            Debug.Log ("asd");
-        }
 
         public void StartListening ()
         {

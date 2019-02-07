@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Hirame.Minerva.GameEvents
 {
     [CreateAssetMenu (menuName = "Minerva/Events/Game Event")]
     public class GameEvent : ScriptableObject
     {
-        [SerializeField] private List<GameEventListener> dynamicListeners = new List<GameEventListener> ();
+        [FormerlySerializedAs ("dynamicListeners")] public List<GameEventListener> DynamicListeners = new List<GameEventListener> ();
 
         [SerializeField] private bool enableStaticEvent;
         [SerializeField] private UnityEvent staticEvent;
@@ -20,9 +21,9 @@ namespace Hirame.Minerva.GameEvents
 
         public void Raise ()
         {
-            for (var i = dynamicListeners.Count - 1; i >= 0; i--)
+            for (var i = DynamicListeners.Count - 1; i >= 0; i--)
             {
-                dynamicListeners[i].OnEventRaised ();
+                DynamicListeners[i].OnEventRaised ();
             }
 
             if (enableStaticEvent)
@@ -38,16 +39,16 @@ namespace Hirame.Minerva.GameEvents
         /// <returns>'true' if the listener was added, 'false' otherwise.</returns>
         public bool TryAddListener (GameEventListener listener)
         {
-            if (dynamicListeners.Contains (listener))
+            if (DynamicListeners.Contains (listener))
                 return false;
 
-            dynamicListeners.Add (listener);
+            DynamicListeners.Add (listener);
             return true;
         }
 
         public void AddListener (GameEventListener listener)
         {
-            dynamicListeners.Add (listener);
+            DynamicListeners.Add (listener);
         }
 
         /// <summary>
@@ -57,18 +58,18 @@ namespace Hirame.Minerva.GameEvents
         /// <returns></returns>
         public void AddUniqueListener (GameEventListener listener)
         {
-            if (!dynamicListeners.Contains (listener))
-                dynamicListeners.Add (listener);
+            if (!DynamicListeners.Contains (listener))
+                DynamicListeners.Add (listener);
         }
 
         public void RemoveListener (GameEventListener listener)
         {
-            dynamicListeners.Remove (listener);
+            DynamicListeners.Remove (listener);
         }
 
         public void RemoveAllListeners ()
         {
-            dynamicListeners.Clear ();
+            DynamicListeners.Clear ();
         }
     }
 

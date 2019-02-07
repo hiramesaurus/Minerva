@@ -9,9 +9,9 @@ namespace Hirame.Minerva.GameEvents.Editor
     {
         private GameEvent gameEvent;
         
-        private SerializedProperty eventToggleValue;
+        private SerializedProperty enableStaticEventBool;
         private SerializedProperty staticEvent;
-        private SerializedProperty dynamicListeners;
+        //private SerializedProperty dynamicListeners;
         
         private void OnEnable ()
         {
@@ -20,9 +20,9 @@ namespace Hirame.Minerva.GameEvents.Editor
             DontDraw ("staticEvent");
             DontDraw ("dynamicListeners");
             
-            eventToggleValue = serializedObject.FindProperty ("enableStaticEvent");
+            enableStaticEventBool = serializedObject.FindProperty ("enableStaticEvent");
             staticEvent = serializedObject.FindProperty ("staticEvent");
-            dynamicListeners = serializedObject.FindProperty ("dynamicListeners");
+            //dynamicListeners = serializedObject.FindProperty ("dynamicListeners");
         }
 
         public override void OnInspectorGUI ()
@@ -31,17 +31,13 @@ namespace Hirame.Minerva.GameEvents.Editor
             {
                 if (GUILayout.Button ("Raise"))
                 {
-                    gameEvent.RaiseEvent ();
+                    gameEvent.Raise ();
                     return;
                 }
             
                 if (GUILayout.Button ("Clear"))
                 {
-                    if (dynamicListeners.arraySize == 0)
-                        return;
-                    
-                    dynamicListeners.ClearArray ();
-                    serializedObject.ApplyModifiedProperties ();
+                    gameEvent.DynamicListeners.Clear ();
                     return;
                 }
             }
@@ -49,31 +45,26 @@ namespace Hirame.Minerva.GameEvents.Editor
 
             using (new GUILayout.VerticalScope (EditorStyles.helpBox))
             {
-                EditorGUILayout.LabelField ("Dynamic Listeners", EditorStyles.boldLabel);
-                
-                var count = dynamicListeners.arraySize;
+                var count = gameEvent.DynamicListeners.Count;
+                EditorGUILayout.LabelField ($"Dynamic Listeners ({count})", EditorStyles.boldLabel);
 
                 if (count == 0)
                 {
                     EditorGUILayout.LabelField ("None", EditorStyles.textArea);
                 }
 
-                for (var i = 0; i < count; i++)
-                {                   
-                    var reference = dynamicListeners.GetArrayElementAtIndex (i).objectReferenceValue;
-                    EditorGUILayout.ObjectField (
-                        EditorUtility.InstanceIDToObject (reference.GetInstanceID ()), 
-                        typeof(Object), 
-                        true);
+                foreach (var listener in gameEvent.DynamicListeners)
+                {
+                    GUILayout.Button ("a listener");
                 }
 
             }
             
             using (new GUILayout.VerticalScope (EditorStyles.helpBox))
             {
-                base.OnInspectorGUI ();
-
-                if (eventToggleValue.boolValue)
+                EditorGUILayout.PropertyField (enableStaticEventBool);
+                
+                if (enableStaticEventBool.boolValue)
                     EditorGUILayout.PropertyField (staticEvent);
             }
 

@@ -13,7 +13,6 @@ namespace Hirame.Minerva.GameEvents
 
         private void OnEnable ()
         {
-            Listener.ParentInstanceId = GetInstanceID ();
             Listener.StartListening ();
         }
 

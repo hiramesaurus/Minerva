@@ -59,8 +59,6 @@ namespace Hirame.Minerva.Editor
 
                 if (changeScope.changed)
                 {
-                    Debug.Log ("22");
-
                     serializedObject.ApplyModifiedProperties ();
                     EditorUtility.SetDirty (this);
                 }
