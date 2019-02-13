@@ -6,14 +6,14 @@ namespace Sunrus.Minerva
     public abstract class GlobalValue<T> : GlobalValueBase
         where T : unmanaged
     {
-        [FormerlySerializedAs ("InitialValue")] public T Initial;
-        [FormerlySerializedAs ("RuntimeValue")] public T Runtime;
+        [FormerlySerializedAs ("Initial")] public T InitialValue;
+        [FormerlySerializedAs ("Runtime")] public T RuntimeValue;
 
-        public override void Reset () => Runtime = Initial;
+        public override void Reset () => RuntimeValue = InitialValue;
 
-        public override string RuntimeValueToString () =>  Runtime.ToString ();
+        public override string RuntimeValueToString () =>  RuntimeValue.ToString ();
 
-        public override string InitialValueToString () => Initial.ToString ();
+        public override string InitialValueToString () => InitialValue.ToString ();
     }
     
     public abstract class GlobalReference<T> : GlobalValueBase

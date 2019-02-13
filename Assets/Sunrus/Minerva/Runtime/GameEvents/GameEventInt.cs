@@ -10,7 +10,7 @@ namespace Sunrus.Minerva.GameEvents
 
         public void Raise (int value)
         {
-            EventData.Runtime = value;
+            EventData.RuntimeValue = value;
         }
 
         public void RaiseIncrementing (int value)

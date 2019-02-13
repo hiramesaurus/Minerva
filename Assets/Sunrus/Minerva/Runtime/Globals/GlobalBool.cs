@@ -5,7 +5,7 @@ namespace Sunrus.Minerva
     [CreateAssetMenu (menuName = "Minerva/Globals/Boolean")]
     public sealed class GlobalBool : GlobalValue<bool>
     {
-        public void Invert () => Runtime = !Runtime;
+        public void Invert () => RuntimeValue = !RuntimeValue;
         
     }
 }

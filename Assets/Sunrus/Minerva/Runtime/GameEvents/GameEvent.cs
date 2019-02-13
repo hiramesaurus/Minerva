@@ -86,7 +86,7 @@ namespace Sunrus.Minerva.GameEvents
         public bool LinkGlobal;
         public T2 EventData;
 
-        public T1 GetEventRuntime => EventData.Runtime;
-        public T1 GetEventInitial => EventData.Initial;
+        public T1 GetEventRuntimeValue => EventData.RuntimeValue;
+        public T1 GetEventInitialValue => EventData.InitialValue;
     }
 }

@@ -10,8 +10,7 @@ namespace Sunrus.Minerva.GameEvents.Editor
         private bool showProperty;
         private float DrawerHeight;
         
-        // TODO:
-        // Me no like. Ugly, ugly, UGLY!
+
         public override void OnGUI (Rect fullRect, SerializedProperty property, GUIContent label)
         {
             var listenerProp = property.FindPropertyRelative ("ListenedEvent");
@@ -22,18 +21,8 @@ namespace Sunrus.Minerva.GameEvents.Editor
             fullRect.height -= 8;
             var lineRect = fullRect;
             lineRect.height = 20;
-
-            if (listenerProp.objectReferenceValue != null)
-            {
-                var labelSuffix = listenerProp.objectReferenceValue.name;
-                label.text = $"{label.text} ({labelSuffix})";
-            }
-            else
-            {
-                label.text = $"{label.text} (None)";
-            }
-           
-            
+            var labelSuffix = listenerProp?.objectReferenceValue?.name ?? "(None)";
+       
             GUI.Box (fullRect, "");
             GUI.Box (lineRect, "");
             
@@ -48,8 +37,18 @@ namespace Sunrus.Minerva.GameEvents.Editor
             }
 
             lineRect.y += 2;
-            GUI.Label (lineRect, label, EditorStyles.label);
-        
+            
+            var halfRect = lineRect;
+            halfRect.width = 65;
+            GUI.Label (halfRect, $"{label.text} ->", EditorStyles.label);
+
+            halfRect.x += halfRect.width;
+            halfRect.width += lineRect.width - 100;
+
+            var color = GUI.color;
+            GUI.color = Color.green;
+            GUI.Label (halfRect, labelSuffix, EditorStyles.label);
+            GUI.color = color;
             lineRect.y += 20;
             lineRect.height = 16;
 
