@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sunrus.Minerva.Editor
+namespace Hiramesaurus.Minerva.Editor
 {
     public static class GlobalsEditorUtility
     {

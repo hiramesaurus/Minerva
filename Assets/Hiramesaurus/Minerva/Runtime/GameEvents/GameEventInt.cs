@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sunrus.Minerva.GameEvents
+namespace Hiramesaurus.Minerva.GameEvents
 {
     [CreateAssetMenu (menuName = "Minerva/Events/Game Event Int")]
     public class GameEventInt : GameEvent<int, GlobalInt>

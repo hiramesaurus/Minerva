@@ -1,8 +1,8 @@
-﻿using UnityEditor;
-using Sunrus.Minerva.Editor;
+﻿using Hiramesaurus.Minerva.Editor;
+using UnityEditor;
 using UnityEngine;
 
-namespace Sunrus.Minerva.GameEvents.Editor
+namespace Hiramesaurus.Minerva.GameEvents.Editor
 {
     [CustomEditor (typeof (GameEventReceiver))]
     public class GameEventReceiverEditor : MinervaEditorBase

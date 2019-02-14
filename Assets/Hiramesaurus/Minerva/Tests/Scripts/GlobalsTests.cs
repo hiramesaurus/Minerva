@@ -3,7 +3,7 @@ using UnityEngine;
 using NUnit.Framework;
 using Assert = UnityEngine.Assertions.Assert;
 
-namespace Sunrus.Minerva.Tests
+namespace Hiramesaurus.Minerva.Tests
 {
     public class GlobalsTests
     {

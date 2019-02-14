@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sunrus.Minerva
+namespace Hiramesaurus.Minerva
 {
     [CreateAssetMenu (menuName = "Minerva/Globals/Object")]
     public class GlobalObject : GlobalReference<Object>

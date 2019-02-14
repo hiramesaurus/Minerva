@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Sunrus.Minerva.Editor
+namespace Hiramesaurus.Minerva.Editor
 {
     /// <summary>
     /// A super Minimal base drawer that hides the annoying script field.

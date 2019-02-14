@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sunrus.Minerva.GameEvents
+namespace Hiramesaurus.Minerva.GameEvents
 {
     public static class GameEventRegistry
     {      

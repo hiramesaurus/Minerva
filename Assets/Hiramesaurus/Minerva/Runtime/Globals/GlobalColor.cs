@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Sunrus.Minerva
+namespace Hiramesaurus.Minerva
 {
     [CreateAssetMenu (menuName = "Minerva/Globals/Color")]
     public sealed class GlobalColor : GlobalValue<Color>

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Sunrus.Minerva.GameEvents.Editor
+namespace Hiramesaurus.Minerva.GameEvents.Editor
 {
     [CustomPropertyDrawer (typeof (GameEventListener))]
     public class GameEventListenerDrawer : PropertyDrawer

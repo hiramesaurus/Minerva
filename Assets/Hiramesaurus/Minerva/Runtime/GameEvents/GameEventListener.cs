@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Sunrus.Minerva.GameEvents
+namespace Hiramesaurus.Minerva.GameEvents
 {
     [System.Serializable]
     public class GameEventListener

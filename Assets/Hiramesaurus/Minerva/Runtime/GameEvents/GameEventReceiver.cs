@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Sunrus.Minerva.GameEvents
+namespace Hiramesaurus.Minerva.GameEvents
 {
     [ExecuteAlways]
     public class GameEventReceiver : MonoBehaviour

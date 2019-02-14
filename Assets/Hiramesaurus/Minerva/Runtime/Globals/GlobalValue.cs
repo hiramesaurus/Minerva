@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Sunrus.Minerva
+namespace Hiramesaurus.Minerva
 {
     public abstract class GlobalValue<T> : GlobalValueBase
         where T : unmanaged

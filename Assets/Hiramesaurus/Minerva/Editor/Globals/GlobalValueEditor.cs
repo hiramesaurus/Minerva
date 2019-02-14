@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace Sunrus.Minerva.Editor
+namespace Hiramesaurus.Minerva.Editor
 {
     [CustomEditor (typeof (GlobalValueBase), true)]
     public class GlobalValueEditor : MinervaEditorBase
