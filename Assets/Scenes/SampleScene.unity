@@ -384,8 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Listener:
-    EnableInEditMode: 0
-    ListenedEvent: {fileID: 11400000, guid: f3a4137fb6027234486e7d4b1e1a4aaf, type: 2}
+    EnableInEditMode: 1
+    ListenedEvent: {fileID: 11400000, guid: d1b88fd96e29a5748b0714b6a84177d6, type: 2}
     EventHandler:
       m_PersistentCalls:
         m_Calls:
