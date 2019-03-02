@@ -1,48 +1,95 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Hiramesaurus.Minerva
 {
     public abstract class GlobalValue<T> : GlobalValueBase
-        where T : unmanaged
+        where T : unmanaged, IEquatable<T>
     {
         [FormerlySerializedAs ("Initial")] public T InitialValue;
         [FormerlySerializedAs ("Runtime")] public T RuntimeValue;
 
         public override void Reset () => RuntimeValue = InitialValue;
 
+        public override bool IsInitialValue ()
+        {
+            return InitialValue.Equals (RuntimeValue);
+        }
+        
+        public override string RawValueString ()
+        {
+            return RuntimeValue.ToString ();
+        }
+        
         public override string RuntimeValueToString () =>  RuntimeValue.ToString ();
 
         public override string InitialValueToString () => InitialValue.ToString ();
-    }
-    
-    public abstract class GlobalReference<T> : GlobalValueBase
-        where T : class
-    {
-        public T Initial;
-        public T Runtime;
-
-        public U GetRuntimeAs<U> () where U : class, T
+        
+        public override bool StringValueEquals (string value)
         {
-            return Runtime as U;
+            return string.CompareOrdinal (RawValueString (), value) == 0;
+        }
+             
+        public override bool StringValueIsNot (string value)
+        {
+            return string.CompareOrdinal (RawValueString (), value) != 0;
         }
         
-        public override void Reset () => Runtime = Initial;
-
-        public override string RuntimeValueToString () => Runtime?.ToString () ?? "None (Object)";
-
-        public override string InitialValueToString () => Initial?.ToString () ?? "None (Object)";
-    }
-
-    public abstract class GlobalValueBase : ScriptableObject
-    {
-        public bool ResetOnPlay = true;
+        public override bool StringValueIsGreater (string value)
+        {
+            return string.CompareOrdinal (RawValueString (), value) > 0;
+        }
         
-        public abstract void Reset ();
+        public override bool StringValueIsLess (string value)
+        {
+            return string.CompareOrdinal (RawValueString (), value) < 0;
+        }
 
-        public abstract string RuntimeValueToString ();
+        
+        public static bool operator == (GlobalValue<T> a, GlobalValue<T> b)
+        {        
+            if (ReferenceEquals (a, null) || ReferenceEquals (b, null))
+            {
+                return false;
+            }
+            return EqualityComparer<T>.Default.Equals (a.RuntimeValue, b.RuntimeValue);
+        }
 
-        public abstract string InitialValueToString ();
+        public static bool operator != (GlobalValue<T> a, GlobalValue<T> b)
+        {        
+            return !EqualityComparer<T>.Default.Equals (a.RuntimeValue, b.RuntimeValue);
+        }
+        
+        protected bool Equals (GlobalValue<T> other)
+        {
+            return InitialValue.Equals (other.InitialValue) && RuntimeValue.Equals (other.RuntimeValue);
+        }
+
+        public override bool Equals (object other)
+        {
+            if (ReferenceEquals (null, other)) 
+                return false;
+            if (ReferenceEquals (this, other))
+                return true;
+            if (other.GetType () != this.GetType ())
+                return false;
+            
+            return Equals ((GlobalValue<T>) other);
+        }
+
+        public override int GetHashCode ()
+        {
+            unchecked
+            {
+                var hashCode = base.GetHashCode ();
+                hashCode = (hashCode * 397) ^ InitialValue.GetHashCode ();
+                hashCode = (hashCode * 397) ^ RuntimeValue.GetHashCode ();
+                return hashCode;
+            }
+        }
+        
     }
 
 }

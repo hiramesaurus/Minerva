@@ -9,16 +9,24 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
     {
         private bool showProperty;
         private float DrawerHeight;
-        
+
+        private SerializedProperty targetProp;     
+        private SerializedProperty listenerProp;
+        private SerializedProperty handlerProp;
+        private SerializedProperty editorToggleProp;
 
         public override void OnGUI (Rect fullRect, SerializedProperty property, GUIContent label)
         {
-            var listenerProp = property.FindPropertyRelative ("ListenedEvent");
-            var handlerProp = property.FindPropertyRelative ("EventHandler");
-            var editorToggleProp = property.FindPropertyRelative ("EnableInEditMode");
+            if (targetProp == null || !targetProp.Equals (property))
+            {
+                targetProp = property;
+                listenerProp = property.FindPropertyRelative ("ListenedEvent");
+                handlerProp = property.FindPropertyRelative ("EventHandler");
+                editorToggleProp = property.FindPropertyRelative ("EnableInEditMode");
+            }
 
             fullRect.y += 8;
-            fullRect.height -= 8;
+            fullRect.height -= 12;
             var lineRect = fullRect;
             lineRect.height = 20;
             var labelSuffix = listenerProp?.objectReferenceValue?.name ?? "(None)";

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestGlobalColor
   m_EditorClassIdentifier: 
   ResetOnPlay: 0
-  Initial: {r: 0.21560162, g: 0.8018868, b: 0.2644587, a: 0}
-  Runtime: {r: 0.21560162, g: 0.8018868, b: 0.2644587, a: 0}
+  InitialValue: {r: 0.21560162, g: 0.8018868, b: 0.2644587, a: 0}
+  RuntimeValue: {r: 0.21560162, g: 0.8018868, b: 0.2644587, a: 0}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestGlobalFloat
   m_EditorClassIdentifier: 
   ResetOnPlay: 1
-  Initial: 14
-  Runtime: 14
+  InitialValue: 14
+  RuntimeValue: 14

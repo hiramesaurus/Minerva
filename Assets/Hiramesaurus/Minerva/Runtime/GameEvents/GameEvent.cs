@@ -1,19 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Hiramesaurus.Minerva.GameEvents
 {
     [CreateAssetMenu (menuName = "Minerva/Events/Game Event")]
     public class GameEvent : ScriptableObject
     {
-        [FormerlySerializedAs ("dynamicListeners")] public List<GameEventListener> DynamicListeners = new List<GameEventListener> ();
+        internal List<GameEventListener> DynamicListeners = new List<GameEventListener> ();
 
         [SerializeField] private bool enableStaticEvent;
         [SerializeField] private UnityEvent staticEvent;
 
-        [System.Obsolete ("Use 'Raise' instead.")]
+        public int ListenerCount => DynamicListeners.Count;
+
+        public void ClearDynamicListeners ()
+        {
+            DynamicListeners.Clear ();
+        }
+        
+        [Obsolete ("Use 'Raise' instead.")]
         public void RaiseEvent ()
         {
             Raise ();
@@ -80,7 +87,7 @@ namespace Hiramesaurus.Minerva.GameEvents
     }
 
     public abstract class GameEvent<T1, T2> : GameEvent
-        where T1 : unmanaged
+        where T1 : unmanaged, IEquatable<T1>
         where T2 : GlobalValue<T1>
     {
         public bool LinkGlobal;

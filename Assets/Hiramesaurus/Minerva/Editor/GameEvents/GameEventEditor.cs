@@ -37,7 +37,8 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
             
                 if (GUILayout.Button ("Clear"))
                 {
-                    gameEvent.DynamicListeners.Clear ();
+                    // TODO:
+                    //gameEvent.DynamicListeners.Clear ();
                     return;
                 }
             }
@@ -45,19 +46,20 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
 
             using (new GUILayout.VerticalScope (EditorStyles.helpBox))
             {
-                var count = gameEvent.DynamicListeners.Count;
-                EditorGUILayout.LabelField ($"Dynamic Listeners ({count})", EditorStyles.boldLabel);
+                var count = gameEvent.ListenerCount;
+                EditorGUILayout.LabelField ($"Dynamic Listeners ({count.ToString()})", EditorStyles.boldLabel);
 
                 if (count == 0)
                 {
                     EditorGUILayout.LabelField ("None", EditorStyles.textArea);
                 }
 
+                /*
                 foreach (var listener in gameEvent.DynamicListeners)
                 {
                     GUILayout.Button ("a listener");
                 }
-
+                */
             }
             
             using (new GUILayout.VerticalScope (EditorStyles.helpBox))
