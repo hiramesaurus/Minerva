@@ -8,22 +8,32 @@ namespace Hiramesaurus.Minerva.GameEvents
     [CreateAssetMenu (menuName = "Minerva/Events/Game Event")]
     public class GameEvent : ScriptableObject
     {
-        internal List<GameEventListener> DynamicListeners = new List<GameEventListener> ();
+        private enum LogLevel
+        {
+            None,
+            Invocations,
+            Listeners,
+            All
+        }
+
+        internal List<GameEventListener> DynamicListeners;
+
+        [SerializeField] private LogLevel logging;
+        [SerializeField] private int expectedCapacity = 3;
 
         [SerializeField] private bool enableStaticEvent;
         [SerializeField] private UnityEvent staticEvent;
 
         public int ListenerCount => DynamicListeners.Count;
 
+        private void Awake ()
+        {
+            DynamicListeners = new List<GameEventListener> (expectedCapacity);
+        }
+
         public void ClearDynamicListeners ()
         {
             DynamicListeners.Clear ();
-        }
-        
-        [Obsolete ("Use 'Raise' instead.")]
-        public void RaiseEvent ()
-        {
-            Raise ();
         }
 
         public void Raise ()
@@ -38,7 +48,7 @@ namespace Hiramesaurus.Minerva.GameEvents
                 staticEvent.Invoke ();
             }
         }
-        
+
         /// <summary>
         /// Add Listener and make sure it is note duplicated.
         /// </summary>
