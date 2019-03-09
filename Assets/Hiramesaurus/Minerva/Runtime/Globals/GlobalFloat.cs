@@ -31,7 +31,7 @@ namespace Hiramesaurus.Minerva
         
         public void Add (GlobalFloat gFloat) => RuntimeValue += gFloat.RuntimeValue;
 
-        public void Subtract (GlobalFloat gFloat) => RuntimeValue += gFloat.RuntimeValue;
+        public void Subtract (GlobalFloat gFloat) => RuntimeValue -= gFloat.RuntimeValue;
 
         public void Multiply (GlobalFloat gFloat) => RuntimeValue *= gFloat.RuntimeValue;
 
@@ -40,7 +40,7 @@ namespace Hiramesaurus.Minerva
 
         public void Add (GlobalInt gInt) => RuntimeValue += gInt.RuntimeValue;
 
-        public void Subtract (GlobalInt gInt) => RuntimeValue += gInt.RuntimeValue;
+        public void Subtract (GlobalInt gInt) => RuntimeValue -= gInt.RuntimeValue;
         
         public void Multiply (GlobalInt gInt) => RuntimeValue *= gInt.RuntimeValue;
 
