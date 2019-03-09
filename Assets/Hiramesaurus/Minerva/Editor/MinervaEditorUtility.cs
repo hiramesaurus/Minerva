@@ -22,7 +22,8 @@ namespace Hiramesaurus.Minerva.Editor
         {
             foreach (var guid in AssetDatabase.FindAssets ("t:globalValueBase"))
             {
-                var global = AssetDatabase.LoadAssetAtPath<GlobalValueBase> (AssetDatabase.GUIDToAssetPath (guid));
+                var path = AssetDatabase.GUIDToAssetPath (guid);
+                var global = AssetDatabase.LoadAssetAtPath<GlobalValueBase> (path);
                 if (!(global.IsInitialValue () || global.ResetOnPlay || force)) 
                     continue;
  
@@ -35,7 +36,8 @@ namespace Hiramesaurus.Minerva.Editor
         {
             foreach (var guid in AssetDatabase.FindAssets ("t:gameEvent"))
             {
-                var gameEvent = AssetDatabase.LoadAssetAtPath<GameEvent> (AssetDatabase.GUIDToAssetPath (guid));
+                var path = AssetDatabase.GUIDToAssetPath (guid);
+                var gameEvent = AssetDatabase.LoadAssetAtPath<GameEvent> (path);
                 if (gameEvent.ListenerCount == 0)
                     continue;
                 
