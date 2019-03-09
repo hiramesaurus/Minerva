@@ -22,6 +22,7 @@ namespace Hiramesaurus.Minerva.Editor
 
         public override void OnInspectorGUI ()
         {
+            serializedObject.Update ();
             
             using (var changeScope = new EditorGUI.ChangeCheckScope ())
             {
