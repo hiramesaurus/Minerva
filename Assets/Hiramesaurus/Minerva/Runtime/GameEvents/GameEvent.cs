@@ -1,22 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Hiramesaurus.Minerva.GameEvents
 {
     [CreateAssetMenu (menuName = "Minerva/Events/Game Event")]
     public class GameEvent : ScriptableObject
     {
-        [FormerlySerializedAs ("dynamicListeners")] public List<GameEventListener> DynamicListeners = new List<GameEventListener> ();
+        private enum LogLevel
+        {
+            None,
+            Invocations,
+            Listeners,
+            All
+        }
+
+        internal List<GameEventListener> DynamicListeners;
+
+        [SerializeField] private LogLevel logging;
+        [SerializeField] private int expectedCapacity = 3;
 
         [SerializeField] private bool enableStaticEvent;
         [SerializeField] private UnityEvent staticEvent;
 
-        [System.Obsolete ("Use 'Raise' instead.")]
-        public void RaiseEvent ()
+        public int ListenerCount => DynamicListeners.Count;
+
+        private void Awake ()
         {
-            Raise ();
+            DynamicListeners = new List<GameEventListener> (expectedCapacity);
+        }
+
+        public void ClearDynamicListeners ()
+        {
+            DynamicListeners.Clear ();
         }
 
         public void Raise ()
@@ -31,7 +48,7 @@ namespace Hiramesaurus.Minerva.GameEvents
                 staticEvent.Invoke ();
             }
         }
-        
+
         /// <summary>
         /// Add Listener and make sure it is note duplicated.
         /// </summary>
@@ -80,7 +97,7 @@ namespace Hiramesaurus.Minerva.GameEvents
     }
 
     public abstract class GameEvent<T1, T2> : GameEvent
-        where T1 : unmanaged
+        where T1 : unmanaged, IEquatable<T1>
         where T2 : GlobalValue<T1>
     {
         public bool LinkGlobal;

@@ -15,8 +15,8 @@ namespace Hiramesaurus.Minerva.Editor
         {
             global = target as GlobalValueBase;   
             
-            initialValue = serializedObject.FindProperty ("Initial");
-            runtimeValue = serializedObject.FindProperty ("Runtime");
+            initialValue = serializedObject.FindProperty ("InitialValue");
+            runtimeValue = serializedObject.FindProperty ("RuntimeValue");
             resetBool = serializedObject.FindProperty ("ResetOnPlay");
         }
 

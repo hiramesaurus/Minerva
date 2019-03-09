@@ -43,3 +43,4 @@ Assets/ProBuilder Data/*
 *.unitypackage
 /Logs
 Assets/Plugins/RootMotion/FinalIK/_Integration/*
+Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll

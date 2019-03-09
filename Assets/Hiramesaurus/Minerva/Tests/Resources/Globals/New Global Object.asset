@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: New Global Object
   m_EditorClassIdentifier: 
   ResetOnPlay: 1
-  Initial: {fileID: 0}
-  Runtime: {fileID: 0}
+  InitialValue: {fileID: 0}
+  RuntimeValue: {fileID: 0}
