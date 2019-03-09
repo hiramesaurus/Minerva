@@ -8,7 +8,7 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
     public class GameEventListenerDrawer : PropertyDrawer
     {
         private bool showProperty;
-        private float DrawerHeight;
+        private float drawerHeight;
 
         private SerializedProperty targetProp;     
         private SerializedProperty listenerProp;
@@ -81,7 +81,8 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
 
         public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
         {
-            return 16 + EditorGUI.GetPropertyHeight (property);
+            var eventHeight = property.FindPropertyRelative ("EventHandler");
+            return 70 + EditorGUI.GetPropertyHeight (eventHeight);
         }
 
 
