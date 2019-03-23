@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ad8af34519c2946b18a884a674589e, type: 3}
   m_Name: TestGameEvent
   m_EditorClassIdentifier: 
-  DynamicListeners: []
+  Logging: -1
+  defaultCapacity: 3
   enableStaticEvent: 0
   staticEvent:
     m_PersistentCalls:

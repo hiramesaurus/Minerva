@@ -4,18 +4,15 @@ using UnityEngine;
 
 namespace Hiramesaurus.Minerva.GameEvents.Editor
 {
-    [CustomEditor (typeof (GameEventReceiver))]
-    public class GameEventReceiverEditor : MinervaEditorBase
+    [CustomEditor (typeof (GameEventListener))]
+    public class GameEventListenerEditor : MinervaEditorBase
     {
-        private GameEventReceiver receiver;
+        private GameEventListener listener;
         private SerializedProperty ListenerProp;
         
         private void OnEnable ()
         {
-            receiver = target as GameEventReceiver;
-            if (receiver != null)
-                receiver.ConvertToNewListener ();
-
+            listener = target as GameEventListener;
             ListenerProp = serializedObject.FindProperty ("Listener");
         }
 

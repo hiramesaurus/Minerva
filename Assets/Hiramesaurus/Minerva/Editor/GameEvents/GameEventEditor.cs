@@ -12,9 +12,6 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
         private SerializedProperty enableStaticEventBoolProp;
         private SerializedProperty staticEventProp;
         private SerializedProperty capacityProp;
-        private SerializedProperty loggingProp;
-
-        //private SerializedProperty dynamicListeners;
 
         private void OnEnable ()
         {
@@ -25,10 +22,7 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
 
             enableStaticEventBoolProp = serializedObject.FindProperty ("enableStaticEvent");
             staticEventProp = serializedObject.FindProperty ("staticEvent");
-            capacityProp = serializedObject.FindProperty ("expectedCapacity");
-            loggingProp = serializedObject.FindProperty ("logging");
-
-            //dynamicListeners = serializedObject.FindProperty ("dynamicListeners");
+            capacityProp = serializedObject.FindProperty ("defaultCapacity");
         }
 
         public override void OnInspectorGUI ()
@@ -57,7 +51,7 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
                     EditorGUILayout.Space ();
 
                     EditorGUILayout.IntField ("Capacity", capacityProp.intValue, EditorStyles.label);
-                    EditorGUILayout.PropertyField (loggingProp);
+                    gameEvent.Logging = (GameEvent.LogFlags) EditorGUILayout.EnumFlagsField ("Logging", gameEvent.Logging);
                 }
 
                 using (new GUILayout.VerticalScope (GUI.skin.box))
@@ -70,12 +64,23 @@ namespace Hiramesaurus.Minerva.GameEvents.Editor
                         EditorGUILayout.LabelField ("None", EditorStyles.textArea);
                     }
 
-                    /*
                     foreach (var listener in gameEvent.DynamicListeners)
                     {
-                        GUILayout.Button ("a listener");
+                        using (new GUILayout.HorizontalScope ())
+                        {
+                            if (listener.Owner)
+                            {
+                                EditorGUILayout.ObjectField (listener.Owner, typeof (Object), true);
+                            }
+                            else
+                            {
+                                EditorGUILayout.LabelField ("None Unity.Object");
+                            }
+  
+                        }
+   
                     }
-                    */
+
                 }
 
                 using (new GUILayout.VerticalScope (GUI.skin.box))

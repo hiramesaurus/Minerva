@@ -3,36 +3,29 @@ using UnityEngine.Events;
 
 namespace Hiramesaurus.Minerva.GameEvents
 {
-    [System.Serializable]
-    public class GameEventListener
+    [ExecuteAlways]
+    public class GameEventListener : MonoBehaviour
     {
-        public bool EnableInEditMode;
-        
-        public GameEvent ListenedEvent;
-        public UnityEvent EventHandler;
+        public EventListener Listener;
 
-        public void StartListening ()
+        private void OnEnable ()
         {
-            if (ListenedEvent != null)
-                ListenedEvent.AddListener (this);
+            Listener.StartListening ();
         }
 
-        public void StopListening ()
+        private void OnDisable ()
         {
-            if (ListenedEvent != null)
-                ListenedEvent.RemoveListener (this);
-        }
-        
-        public void OnEventRaised ()
-        {
-            EventHandler.Invoke ();
+            Listener.StopListening ();
         }
 
-        public void Clear ()
+        private void OnDestroy ()
         {
-            ListenedEvent.RemoveListener (this);
-            EventHandler.RemoveAllListeners ();
+            Listener.Clear ();
+        }
+
+        private void Reset ()
+        {
+            Listener = new EventListener (this);
         }
     }
-
 }

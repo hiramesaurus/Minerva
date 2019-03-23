@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Hiramesaurus.Minerva.GameEvents.Editor
 {
-    [CustomPropertyDrawer (typeof (GameEventListener))]
+    [CustomPropertyDrawer (typeof (EventListener))]
     public class GameEventListenerDrawer : PropertyDrawer
     {
         private bool showProperty;
