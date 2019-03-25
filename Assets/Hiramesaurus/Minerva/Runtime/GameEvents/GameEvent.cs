@@ -36,9 +36,12 @@ namespace Hiramesaurus.Minerva.GameEvents
             DynamicListeners = new List<EventListener> (defaultCapacity);
         }
 
-        public void Raise (
-            [CallerFilePath] string callerFilePath = "",
-            [CallerMemberName] string callerMemberName = "")
+        public void Raise (UnityEngine.Object caller)
+        {
+            
+        }
+        
+        public void Raise ([CallerFilePath] string callerFilePath = "", [CallerMemberName] string callerMemberName = "")
         {
             Log ($"Event Raised -> <color=green>{name}</color>", LogFlags.Invocations, 
                 $"Caller: {callerFilePath}.{callerMemberName}.", LogFlags.Caller);

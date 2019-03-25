@@ -4,10 +4,14 @@ using UnityEngine;
 namespace Hiramesaurus.Minerva
 {
     [CreateAssetMenu (menuName = "Minerva/Globals/Color")]
-    public sealed class GlobalColor : GlobalValue<Color>
+    public sealed class GlobalColor : GlobalStruct<Color>
     {
         public void Multiply (float multiplier) => RuntimeValue *= multiplier;
 
-        public void Multiply (Color color) => RuntimeValue *= color;
+        public void Divide (float divider) => RuntimeValue /= divider;
+
+        public void Multiply (int multiplier) => RuntimeValue *= multiplier;
+
+        public void Divide (int divider) => RuntimeValue /= divider;
     }
 }

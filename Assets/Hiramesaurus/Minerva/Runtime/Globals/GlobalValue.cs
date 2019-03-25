@@ -8,8 +8,8 @@ namespace Hiramesaurus.Minerva
     public abstract class GlobalValue<T> : GlobalValueBase
         where T : unmanaged, IEquatable<T>
     {
-        [FormerlySerializedAs ("Initial")] public T InitialValue;
-        [FormerlySerializedAs ("Runtime")] public T RuntimeValue;
+        public T InitialValue;
+        public T RuntimeValue;
 
         public override void Reset () => RuntimeValue = InitialValue;
 
@@ -59,6 +59,10 @@ namespace Hiramesaurus.Minerva
 
         public static bool operator != (GlobalValue<T> a, GlobalValue<T> b)
         {        
+            if (ReferenceEquals (a, null) || ReferenceEquals (b, null))
+            {
+                return false;
+            }
             return !EqualityComparer<T>.Default.Equals (a.RuntimeValue, b.RuntimeValue);
         }
         
@@ -85,7 +89,7 @@ namespace Hiramesaurus.Minerva
             {
                 var hashCode = base.GetHashCode ();
                 hashCode = (hashCode * 397) ^ InitialValue.GetHashCode ();
-                hashCode = (hashCode * 397) ^ RuntimeValue.GetHashCode ();
+                hashCode = (hashCode * 571) ^ RuntimeValue.GetHashCode ();
                 return hashCode;
             }
         }

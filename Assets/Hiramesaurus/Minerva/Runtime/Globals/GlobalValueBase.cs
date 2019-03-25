@@ -2,26 +2,24 @@
 
 namespace Hiramesaurus.Minerva
 {
-    public abstract class GlobalValueBase : ScriptableObject
+    public abstract class GlobalValueBase : GlobalBase
     {
-        public bool ResetOnPlay = true;
+        public abstract void Add (int value);
+
+        public abstract void Subtract (int value);
+
+        public abstract void Divide (int value);
+
+        public abstract void Multiply (int value);
         
-        public abstract void Reset ();
-
-        public abstract string RawValueString ();
         
-        public abstract bool StringValueEquals (string value);
-
-        public abstract bool StringValueIsGreater (string value);
-
-        public abstract bool StringValueIsLess (string value);
-
-        public abstract bool StringValueIsNot (string value);
+        public abstract void Add (float value);
         
-        public abstract bool IsInitialValue ();
-        
-        public abstract string RuntimeValueToString ();
+        public abstract void Subtract (float value);
 
-        public abstract string InitialValueToString ();
+        public abstract void Divide (float value);
+
+        public abstract void Multiply (float value);
+
     }
 }
