@@ -1,0 +1,16 @@
+{
+    "name": "Hiramesaurus.Minerva.Editor",
+    "references": [
+        "Hiramesaurus.Minerva"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

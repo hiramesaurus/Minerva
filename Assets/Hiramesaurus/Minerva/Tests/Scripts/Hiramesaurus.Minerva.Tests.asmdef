@@ -1,7 +1,7 @@
 {
-    "name": "Sunrus.Minerva.Tests",
+    "name": "Hiramesaurus.Minerva.Tests",
     "references": [
-        "Hirame.Minerva"
+        "Hiramesaurus.Minerva"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

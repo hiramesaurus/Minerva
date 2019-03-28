@@ -1,12 +1,8 @@
 {
-    "name": "Hirame.Minerva.Editor",
-    "references": [
-        "Hirame.Minerva"
-    ],
+    "name": "Hiramesaurus.Minerva",
+    "references": [],
     "optionalUnityReferences": [],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

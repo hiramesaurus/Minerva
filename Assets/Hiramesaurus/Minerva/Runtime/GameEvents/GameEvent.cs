@@ -36,12 +36,9 @@ namespace Hiramesaurus.Minerva.GameEvents
             DynamicListeners = new List<EventListener> (defaultCapacity);
         }
 
-        public void Raise (
-            [CallerFilePath] string callerFilePath = "",
-            [CallerMemberName] string callerMemberName = "")
+        public void Raise ()
         {
-            Log ($"Event Raised -> <color=green>{name}</color>", LogFlags.Invocations, 
-                $"Caller: {callerFilePath}.{callerMemberName}.", LogFlags.Caller);
+            Log ($"Event Raised -> <color=green>{name}</color>", LogFlags.Invocations);
 
             if (enableStaticEvent)
             {
@@ -54,58 +51,45 @@ namespace Hiramesaurus.Minerva.GameEvents
             }
         }
 
-        /// <summary>
-        /// Add Listener and make sure it is note duplicated.
-        /// </summary>
-        /// <param name="receiver"></param>
-        /// <returns>'true' if the listener was added, 'false' otherwise.</returns>
-        public bool TryAddListener (EventListener listener, [CallerMemberName] string callerMemberName = "")
+        public void AddListener (EventListener listener)
         {
-            if (DynamicListeners.Contains (listener))
-                return false;
-
-            AddListener (listener, callerMemberName);
-            return true;
-        }
-
-        public void AddListener (EventListener listener, [CallerMemberName] string callerMemberName = "")
-        {
-            Log ($"Added Listener: {listener}", LogFlags.Listeners, 
-                $"Caller: {callerMemberName}.", LogFlags.Caller);
+            Log ($"Added Listener: {listener.Owner.name}", LogFlags.Listeners);
             DynamicListeners.Add (listener);
         }
 
-        public void RemoveListener (EventListener listener, [CallerMemberName] string callerMemberName = "")
+        public void RemoveListener (EventListener listener)
         {
-            Log ($"Removed Listener: {listener}", LogFlags.Listeners, 
-                $"Caller: {callerMemberName}.", LogFlags.Caller);
+            Log ($"Removed Listener: {listener.Owner.name}", LogFlags.Listeners);
             DynamicListeners.Remove (listener);
         }
         
-        public void ClearDynamicListeners ([CallerMemberName] string callerMemberName = "")
+        public void ClearDynamicListeners ()
         {
-            Log ("Removed ALL listeners.", LogFlags.Listeners, 
-                $"Caller: {callerMemberName}.", LogFlags.Caller);
+            Log ("Removed ALL listeners.", LogFlags.Listeners);
             DynamicListeners.Clear ();
         }
 
         [Conditional ("UNITY_EDITOR"), Conditional ("DEVELOPMENT_BUILD")]
         private void Log (string message, LogFlags flag)
         {
-            if ((Logging & flag) == flag)
+            if ((Logging & flag) != flag) 
+                return;
+            
+            if ((Logging & LogFlags.Caller) == LogFlags.Caller)
+            {
+                var frame = new StackTrace (true).GetFrame (2);
+                var method = frame.GetMethod ();
+                var callerClass = method.DeclaringType;
+                var callerMethod = method.Name;
+                
+                Debug.Log ($"[Minerva]: {message}\nCaller: {callerClass}.{callerMethod}");
+            }
+            else
+            {
                 Debug.Log ($"[Minerva]: {message}");
+            }
         }
 
-        [Conditional ("UNITY_EDITOR"), Conditional ("DEVELOPMENT_BUILD")]
-        private void Log (string message, LogFlags flag, string info, LogFlags infoFlag)
-        {
-            if ((Logging & infoFlag) == infoFlag)
-            {
-                Log ($"{message}.\n{info}\n", flag);
-                return;
-            }
-            Log (message, flag);
-        }
     }
 
     public abstract class GameEvent<T> : GameEvent
